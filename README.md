@@ -1,1 +1,1 @@
-Решение бизнес-задач с помощью SQL
+Solving business problems with SQL
