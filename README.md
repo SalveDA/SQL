@@ -3,3 +3,4 @@ Solving business problems with SQL
 ![page_3_4](https://github.com/SalveDA/SQL/blob/main/page_3_4.png)
 ![page_5_6](https://github.com/SalveDA/SQL/blob/main/page_5_6.png)
 ![page_7_8](https://github.com/SalveDA/SQL/blob/main/page_7_8.png)
+![page_9_10](https://github.com/SalveDA/SQL/blob/main/page_9_10.png)
