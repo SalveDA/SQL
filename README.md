@@ -76,23 +76,27 @@ limit 25*<br/>
 
 Query result:  
 
+![name_of_product](https://github.com/SalveDA/SQL/blob/main/name_of_product.png)
+
+**2.	Client portrait**  
+2.1 Let's determine how many B2B (Corporate) and B2C (Consumer) customers the company has and what share of the total revenue they bring.  
+To do this, we calculate the number of customers and revenue by customer category.  
+
+***Number of clients and revenue by client category:***  
+*select<br/>
+    scu.category,<br/>
+    count (distinct scu.cust_id) as cust_cnt,<br/>
+    round(sum((sp.price - sp.price * sc.discount) * sc.quantity)) as revenue<br/>
+from sql.store_delivery as sd<br/>
+    join sql.store_customers as scu on sd.cust_id = scu.cust_id<br/>
+    join sql.store_carts as sc on sd.order_id = sc.order_id<br/>
+    join sql.store_products as sp on sp.product_id = sc.product_id<br/>
+group by scu.category<br/>
+order by revenue desc*<br/>
+
+Query result:  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-![page_5_6](https://github.com/SalveDA/SQL/blob/main/page_5_6.png)
-
-<br/>
 
 ![page_7_8](https://github.com/SalveDA/SQL/blob/main/page_7_8.png)
 
