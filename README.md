@@ -213,6 +213,21 @@ order by quarter<br/>
 
 Query result:  
 
+![late_orders](https://github.com/SalveDA/SQL/blob/main/late%20orders.png)  
+
+The graph shows that orders sent by “Second Class” are systematically delivered late.  
+
+3.3 Let's analyze to which state and city the most deliveries are made.  
+
+***Calculate the number of deliveries by state and visualize the result using a map:***  
+*select<br/>
+    state,<br/>
+    count(distinct order_id)<br/>
+from sql.store_delivery<br/>
+group by 1<br/>
+order by 2 desc*<br/>
+
+Query result:  
 
 
 
