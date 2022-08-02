@@ -35,14 +35,30 @@ order by date*
 
 Query result:  
 
+![revenue](https://github.com/SalveDA/SQL/blob/main/revenue%20dynamics.png)
+
+Based on the data obtained, it can be seen that the company's income as a whole is growing, but there is an increase and decrease in revenue depending on the season.  
+
+1.2 Let's determine which products are in the greatest demand, for this we will rank the sales of various products in various categories and subcategories:  
+
+***The amount of revenue for various categories and subcategories:***  
+*select<br/>
+    sp.category,<br/>
+    sp.subcategory,<br/>
+    round(sum ((sp.price - sp.price * sc.discount) * sc.quantity)) as revenue<br/>
+from sql.store_carts as sc<br/>
+    join sql.store_products as sp on sc.product_id = sp.product_id<br/>
+group by category, subcategory<br/>
+order by revenue desc*<br/>
+
+Query result:  
 
 
 
 
 
-![page_1_2](https://github.com/SalveDA/SQL/blob/main/page_1_2.png)
 
-<br/>
+
 
 ![page_3_4](https://github.com/SalveDA/SQL/blob/main/page_3_4.png)
 
