@@ -229,8 +229,17 @@ order by 2 desc*<br/>
 
 Query result:  
 
+![delivery_map](https://github.com/SalveDA/SQL/blob/main/delivery_map.png)  
 
+The most popular city for deliveries is **New York City**, with 450 orders delivered, but **New York** State has only 562 deliveries, while **Los Angeles** and **San Francisco** are ranked 2nd and 3rd with 384 and 265 deliveries, respectively, and throughout the state of **California**, 1021 deliveries were made, which is more than ⅕ of all deliveries in the country.
 
+#### CONCLUSION   
+Based on the analysis of the activities of the Pens and Pencils Company, the following recommendations can be made:  
+-	pay attention to the decreasing dynamics of new customers and take measures to increase it;
+-	develop a strategy to increase the average check of the buyer;
+-	analyze the company's logistics; find out why there are delays in deliveries. 
+
+Now, the company has only a warehouse from where all goods are sent - it is located in the city of Houston, Texas (Houston, Texas) and, in order to unload logistics, reduce shipping costs and attract new customers, I recommend scaling the business, namely, open offline store in California.
 
 
 
