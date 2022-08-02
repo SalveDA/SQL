@@ -119,7 +119,55 @@ order by month*<br/>
 
 Query result:
 
+![new_corporate](https://github.com/SalveDA/SQL/blob/main/new%20corporate.png)
+
+From the diagram, it can be seen that the number of new customers is decreasing, which means that the company's revenue is growing at the expense of old customers.  
+
+2.3 Let's study the main indicators for corporate clients, for this we calculate what is the average number of different goods in orders, the average amount of orders, the average number of different offices for corporate clients:  
+***-- the average number of different products in orders and the average amount of orders from corporate customers:***  
+*with quantity_and_sum_order as (<br/>
+select<br/>
+    distinct  scu.cust_nm as cust_nm,<br/>
+    count (distinct sc.order_id) as order_id,<br/>
+    count (distinct sp.product_nm) as qnt,<br/>
+    sum ((sp.price - sp.price * sc.discount) * sc.quantity) as revenue<br/>
+from sql.store_delivery as sd<br/>
+    join sql.store_customers as scu on sd.cust_id = scu.cust_id<br/>
+    join sql.store_carts as sc on sd.order_id = sc.order_id<br/>
+    join sql.store_products as sp on sp.product_id = sc.product_id<br/>
+where scu.category = 'Corporate'<br/>
+group by cust_nm<br/>
+order by cust_nm),*<br/>
+
+***-- average number of different offices for corporate clients:***  
+qnt_office as<br/>
+(select<br/>
+    distinct  scu.cust_nm as cust_nm,<br/>
+   count (distinct sd.zip_code) as cnt_office<br/>
+from sql.store_delivery as sd<br/>
+    join sql.store_customers as scu on sd.cust_id = scu.cust_id<br/>
+where scu.category = 'Corporate'<br/>
+group by cust_nm<br/>
+order by cust_nm)<br/>
+
+select<br/>
+    round (sum (qnt) / sum (order_id), 1) as avg_qnt_product,<br/>
+    round (sum (revenue) / sum (order_id), 1) as avg_sum_order,<br/>
+    round (avg (cnt_office), 1) as avg_cnt_office<br/>
+from quantity_and_sum_order as qs<br/>
+join qnt_office as qo on qs.cust_nm = qo.cust_nm<br/>  
+
+Query result:  
 
 
 
-![page_9_10](https://github.com/SalveDA/SQL/blob/main/page_9_10.png)
+
+
+
+
+
+
+
+
+
+
