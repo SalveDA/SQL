@@ -189,6 +189,30 @@ order by "% success"*<br/>
 
 Query result:  
 
+![Delivery_type](https://github.com/SalveDA/SQL/blob/main/Delivery_type.png)  
+
+Based on the results of the data obtained, we can conclude that orders sent by the second class (Second Class) most often arrive late.  
+
+3.2 It is necessary to find out how systematically this happens. Perhaps the delivery service only had problems for a limited period. To do this, we calculate ***the proportion of orders sent by the second class, which were delivered late, by quarter:***  
+with delivery_time_sc as<br/>
+(select<br/>
+	ship_mode,<br/>
+	date_trunc ('quarter', order_date)::date as quarter,<br/>
+    count (order_id)::numeric as orders_cnt,<br/>
+    count (case when (ship_date - order_date) > 4 then order_id<br/>
+                end)::numeric as late_orders_cnt<br/>
+from sql.store_delivery<br/>
+group by ship_mode, quarter)<br/>
+
+select<br/>
+    quarter,<br/>
+    ROUND ((late_orders_cnt)*100 / orders_cnt, 2) AS "% unsuccess"<br/>
+from delivery_time_sc<br/>
+where ship_mode = 'Second Class'<br/>
+order by quarter<br/>  
+
+Query result:  
+
 
 
 
