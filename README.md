@@ -53,6 +53,28 @@ order by revenue desc*<br/>
 
 Query result:  
 
+![product_category](https://github.com/SalveDA/SQL/blob/main/product_category.png)<br/>
+
+From the table we see that the top three sales leaders include armchairs, telephones and storage space for office supplies.  
+
+1.3 Consider which of the products bring the most profit and what share of the total revenue is their sales. To do this, we will rank the top 25 products by revenue, and also calculate the number of goods sold and their share of total revenue as a percentage:  
+
+***Top 25 products by revenue:***  
+*select<br/>
+    sp.product_nm,<br/>
+    round ((sum (quantity * price * (1 - discount))), 2) as revenue,<br/>
+    sum (sc.quantity) as quantity,<br/>
+    round ((sum (quantity * price * (1 - discount)) / (select
+            sum (quantity * price * (1 - discount))<br/>
+            from sql.store_products as p<br/>
+            join sql.store_carts as c on p.product_id = c.product_id) * 100), 2) as percent_from_total<br/>
+from sql.store_carts as sc<br/>
+    join sql.store_products as sp on sc.product_id = sp.product_id<br/>
+group by product_nm<br/>
+order by revenue desc<br/>
+limit 25*<br/>
+
+Query result:  
 
 
 
@@ -60,9 +82,13 @@ Query result:
 
 
 
-![page_3_4](https://github.com/SalveDA/SQL/blob/main/page_3_4.png)
 
-<br/>
+
+
+
+
+
+
 
 ![page_5_6](https://github.com/SalveDA/SQL/blob/main/page_5_6.png)
 
