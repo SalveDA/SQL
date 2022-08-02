@@ -96,10 +96,30 @@ order by revenue desc*<br/>
 
 Query result:  
 
+![number_of_clients](https://github.com/SalveDA/SQL/blob/main/number_of_clients.png)
+
+According to the data obtained, it can be seen that there are more corporate clients and the revenue from them is higher than from retail buyers.  
+
+2.2 Let's analyze the dynamics of new B2B clients by months. At the same time, we will find out whether revenue is growing due to an increase in sales for old customers or by attracting new ones.  
+
+***Number of new corporate clients by month:***  
+*select<br/>
+    date_trunc ('month', date)::date as month,<br/>
+    count (cust_id) as new_custs<br/>
+from (<br/>
+select<br/>
+    min (sd.order_date) as date,<br/>
+    scu.cust_id<br/>
+from sql.store_delivery as sd<br/>
+join sql.store_customers as scu on sd.cust_id = scu.cust_id<br/>
+where scu.category = 'Corporate'<br/>
+group by scu.cust_id) as cust_date<br/>
+group by month<br/>
+order by month*<br/>
+
+Query result:
 
 
-![page_7_8](https://github.com/SalveDA/SQL/blob/main/page_7_8.png)
 
-<br/>
 
 ![page_9_10](https://github.com/SalveDA/SQL/blob/main/page_9_10.png)
