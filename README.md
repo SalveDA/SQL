@@ -159,6 +159,35 @@ join qnt_office as qo on qs.cust_nm = qo.cust_nm<br/>
 
 Query result:  
 
+![average_number](https://github.com/SalveDA/SQL/blob/main/average_number.png)  
+
+Based on the data obtained, we can conclude that corporate clients are the most valuable for the company, because they account for a large share of revenue, but the number of new customers is steadily falling, and since the number and amount of goods in an order is on average very low, then, accordingly, and revenue will fall. In this case, it is necessary to take actions to attract new corporate clients and increase their average bill.  
+
+**3.	Company logistics**  
+3.1 In order to assess the current picture of delivery logistics, it is necessary to determine how efficiently orders are fulfilled and how deliveries and revenues are distributed by states and cities. To do this, we determine what proportion of orders are completed on time.  
+
+***Type of delivery, total number of orders, number of orders not delivered on time and share of orders completed on time:***  
+*with delivery_time as<br/>
+(select<br/>
+ship_mode,<br/>
+    count (order_id)::numeric as orders_cnt,<br/>
+    count (case when ship_mode = 'Standard Class' and (ship_date - order_date) > 6 then order_id<br/>
+        when ship_mode = 'Second Class' and (ship_date - order_date) > 4 then order_id<br/>
+        when ship_mode = 'First Class' and (ship_date - order_date) > 3 then order_id<br/>
+        when ship_mode = 'Same Day' and (ship_date - order_date) > 0 then order_id<br/>
+        end)::numeric as late_orders_cnt<br/>
+from sql.store_delivery<br/>
+group by ship_mode)<br/>
+
+select<br/>
+    ship_mode,<br/>
+    orders_cnt,<br/>
+    late_orders_cnt,<br/>
+    ROUND ((orders_cnt - late_orders_cnt)*100 / orders_cnt, 2) AS "% success"<br/>
+from delivery_time<br/>
+order by "% success"*<br/>
+
+Query result:  
 
 
 
